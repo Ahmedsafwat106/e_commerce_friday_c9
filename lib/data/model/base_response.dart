@@ -1,0 +1,3 @@
+class BaseResponseM {
+  String? message;
+}

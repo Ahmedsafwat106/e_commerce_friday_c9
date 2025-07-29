@@ -7,12 +7,17 @@ import 'package:e_commerce_friday_c9/presentation/screens/main/main.dart';
 import 'package:e_commerce_friday_c9/presentation/screens/product_datails/product_datails_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/screens/splash/splash_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/shared_view_models/cart_view_model.dart';
+import 'package:e_commerce_friday_c9/presentation/shared_view_models/fav_view_model.dart';
+import 'package:e_commerce_friday_c9/presentation/screens/cart/cart_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/utils/app_theme.dart';
 
 void main() {
   configureDependencies();
-  runApp(BlocProvider(
-    create: (_) => getIt<CartViewModel>(),
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (_) => getIt<CartViewModel>()),
+      BlocProvider(create: (_) => FavViewModel()),
+    ],
     child: const TaswakApp(),
   ));
 }
@@ -31,6 +36,7 @@ class TaswakApp extends StatelessWidget {
         Register.routeName: (_) => Register(),
         Main.routeName: (_) => Main(),
         ProductDetailsScreen.routeName: (_) => ProductDetailsScreen(),
+        CartScreen.routeName: (_) => const CartScreen(),
       },
       initialRoute: SplashScreen.routeName,
     );

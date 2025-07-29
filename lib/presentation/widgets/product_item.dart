@@ -4,28 +4,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_commerce_friday_c9/data/model/response/product_dm.dart';
 import 'package:e_commerce_friday_c9/presentation/screens/product_datails/product_datails_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/shared_view_models/cart_view_model.dart';
+import 'package:e_commerce_friday_c9/presentation/shared_view_models/fav_view_model.dart';
 import 'package:e_commerce_friday_c9/presentation/widgets/loading_widget.dart';
-
-import '../utils/app_assets.dart';
 import '../utils/app_color.dart';
 
 class ProductItem extends StatefulWidget {
   final ProductDM productDM;
   final bool isInCart;
 
-  const ProductItem(
-      {required this.productDM, super.key, required this.isInCart});
+  const ProductItem({
+    required this.productDM,
+    super.key,
+    required this.isInCart,
+  });
 
   @override
   State<ProductItem> createState() => ProductItemState();
 }
 
 class ProductItemState extends State<ProductItem> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -55,9 +52,22 @@ class ProductItemState extends State<ProductItem> {
                   fit: BoxFit.cover,
                   height: MediaQuery.of(context).size.height * .15,
                 ),
-                Image.asset(
-                  AppAssets.icFav,
-                )
+                BlocBuilder<FavViewModel, List<ProductDM>>(
+                  builder: (context, favList) {
+                    final favViewModel = BlocProvider.of<FavViewModel>(context);
+                    final isFav =
+                    favViewModel.isFavorite(widget.productDM);
+                    return IconButton(
+                      icon: Icon(
+                        isFav ? Icons.favorite : Icons.favorite_border,
+                        color: isFav ? Colors.red : Colors.grey,
+                      ),
+                      onPressed: () {
+                        favViewModel.toggleFavorite(widget.productDM);
+                      },
+                    );
+                  },
+                ),
               ],
             ),
             const Spacer(),

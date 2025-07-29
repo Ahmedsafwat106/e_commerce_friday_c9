@@ -19,4 +19,8 @@ class HomeViewModel extends Cubit {
   void loadProducts() {
     getAllProductsUseCase.execute();
   }
+
+  void searchProducts(String query) {
+    getAllProductsUseCase.execute(params: query);
+  }
 }

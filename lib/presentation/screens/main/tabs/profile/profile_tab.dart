@@ -21,6 +21,7 @@ class ProfileTab extends StatelessWidget {
         label: const Text("Logout"),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryColor,
+          foregroundColor: Colors.white, // النص والأيقونة باللون الأبيض
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: const TextStyle(fontSize: 18),
         ),

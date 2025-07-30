@@ -1,3 +1,4 @@
+import 'package:e_commerce_friday_c9/presentation/screens/cart/SingleCartItemScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:e_commerce_friday_c9/domain/di/di.dart';
@@ -10,6 +11,8 @@ import 'package:e_commerce_friday_c9/presentation/shared_view_models/cart_view_m
 import 'package:e_commerce_friday_c9/presentation/shared_view_models/fav_view_model.dart';
 import 'package:e_commerce_friday_c9/presentation/screens/cart/cart_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/utils/app_theme.dart';
+
+import 'data/model/response/product_dm.dart';
 
 void main() {
   configureDependencies();
@@ -27,18 +30,26 @@ class TaswakApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: MyTheme.lightTheme,
+      initialRoute: SplashScreen.routeName,
       routes: {
         SplashScreen.routeName: (_) => const SplashScreen(),
         Login.routeName: (_) => Login(),
         Register.routeName: (_) => Register(),
         Main.routeName: (_) => Main(),
         ProductDetailsScreen.routeName: (_) => ProductDetailsScreen(),
-        CartScreen.routeName: (_) => const CartScreen(),
       },
-      initialRoute: SplashScreen.routeName,
+      onGenerateRoute: (settings) {
+        if (settings.name == SingleCartItemScreen.routeName) {
+          final product = settings.arguments as ProductDM;
+          return MaterialPageRoute(
+            builder: (_) => SingleCartItemScreen(product: product),
+          );
+        }
+        return null;
+      },
     );
   }
 }

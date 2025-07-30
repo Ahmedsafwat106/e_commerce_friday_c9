@@ -1,4 +1,3 @@
-
 import 'package:e_commerce_friday_c9/data/model/response/cart_response.dart';
 
 class CartDM {
@@ -10,14 +9,15 @@ class CartDM {
   int? iV;
   int? totalCartPrice;
 
-  CartDM(
-      {this.sId,
-        this.cartOwner,
-        this.products,
-        this.createdAt,
-        this.updatedAt,
-        this.iV,
-        this.totalCartPrice});
+  CartDM({
+    this.sId,
+    this.cartOwner,
+    this.products,
+    this.createdAt,
+    this.updatedAt,
+    this.iV,
+    this.totalCartPrice,
+  });
 
   CartDM.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -25,7 +25,7 @@ class CartDM {
     if (json['products'] != null) {
       products = <CartProduct>[];
       json['products'].forEach((v) {
-        products!.add(new CartProduct.fromJson(v));
+        products!.add(CartProduct.fromJson(v));
       });
     }
     createdAt = json['createdAt'];

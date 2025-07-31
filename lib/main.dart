@@ -9,9 +9,9 @@ import 'package:e_commerce_friday_c9/presentation/screens/product_datails/produc
 import 'package:e_commerce_friday_c9/presentation/screens/splash/splash_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/shared_view_models/cart_view_model.dart';
 import 'package:e_commerce_friday_c9/presentation/shared_view_models/fav_view_model.dart';
-import 'package:e_commerce_friday_c9/presentation/screens/cart/cart_screen.dart';
 import 'package:e_commerce_friday_c9/presentation/utils/app_theme.dart';
-
+import 'package:e_commerce_friday_c9/presentation/screens/cart/checkout_screen.dart';
+import 'package:e_commerce_friday_c9/presentation/screens/cart/cart_screen.dart';
 import 'data/model/response/product_dm.dart';
 
 void main() {
@@ -40,6 +40,8 @@ class TaswakApp extends StatelessWidget {
         Register.routeName: (_) => Register(),
         Main.routeName: (_) => Main(),
         ProductDetailsScreen.routeName: (_) => ProductDetailsScreen(),
+        CartScreen.routeName: (_) => CartScreen(),
+        CheckoutScreen.routeName: (_) => CheckoutScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == SingleCartItemScreen.routeName) {

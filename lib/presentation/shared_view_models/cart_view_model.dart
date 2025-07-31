@@ -18,8 +18,10 @@ class CartViewModel extends Cubit {
   CartDM? cartDM;
 
   CartViewModel(
-      this.getLoggedUseCase, this.addToCartUseCase, this.removeFromCartUseCase)
-      : super(BaseRequestInitialState());
+      this.getLoggedUseCase,
+      this.addToCartUseCase,
+      this.removeFromCartUseCase,
+      ) : super(BaseRequestInitialState());
 
   void addProductToCart(String id) async {
     Either<Failure, CartDM> either = await addToCartUseCase.execute(id);
@@ -61,5 +63,12 @@ class CartViewModel extends Cubit {
       }
     }
     return null;
+  }
+
+  void placeOrder() {
+    // Simulate placing an order (clears the cart)
+    cartDM?.products?.clear();
+    cartDM?.totalCartPrice = 0;
+    emit(BaseRequestSuccessState());
   }
 }
